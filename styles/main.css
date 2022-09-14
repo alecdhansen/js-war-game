@@ -48,7 +48,7 @@ body {
 .player-text {
   width: 100%;
   font-family: Helvetica;
-  font-size: 30px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,25 +56,41 @@ body {
   position: relative;
   color: white;
 }
-.score-display {
+.score-display1 {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   font-size: 4rem;
-  height: 150px;
+  height: 125px;
   border: none;
   background-color: #252525;
   color: rgb(43, 187, 120);
   text-align: center;
   font-family: Helvetica;
-  font-size: 70px;
+  font-size: 65px;
+  top: 35%;
+}
+.score-display2 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 4rem;
+  height: 125px;
+  border: none;
+  background-color: #252525;
+  color: rgb(43, 187, 120);
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 65px;
   top: 35%;
 }
 .center > h2 {
   font-family: Helvetica;
-  font-size: 50px;
+  font-size: 75px;
   display: flex;
   justify-content: center;
   color: rgb(44, 127, 92);
@@ -84,7 +100,7 @@ body {
   justify-content: space-around;
   width: 100%;
   font-size: 4rem;
-  height: 20%;
+  height: 100px;
   margin-top: 10%;
   text-align: center;
   font-family: Helvetica;
@@ -114,7 +130,6 @@ body {
   border-radius: 10px;
   font-size: 35px;
 }
-
 button {
   position: absolute;
   top: 85%;
@@ -136,4 +151,59 @@ button:hover {
   width: 15.5%;
   height: 15.5%;
   font-size: 15px;
+}
+@media (max-width: 700px) {
+  .table {
+    height: 60vh;
+  }
+  .left {
+    border: 0;
+  }
+  .center {
+    border: 0;
+    width: 45%;
+  }
+  .right {
+    border: 0;
+  }
+  .center > h2 {
+    font-family: Helvetica;
+    font-size: 75px;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    color: rgb(44, 127, 92);
+  }
+  button {
+    width: 75px;
+    margin-top: 15px;
+  }
+  button:hover {
+    width: 80px;
+  }
+  .score-display1 {
+    height: 65px;
+    top: 30%;
+    border-radius: 50%;
+    font-size: 40px;
+    margin-left: 5px;
+  }
+  .score-display2 {
+    height: 65px;
+    top: 30%;
+    border-radius: 50%;
+    font-size: 40px;
+    margin-right: 5px;
+  }
+  .player-text {
+    width: 90%;
+    font-size: 15px;
+    top: 29%;
+    margin-left: 5px;
+  }
+  .hand-display {
+    height: 55px;
+    margin-top: 110px;
+    border-color: #252525;
+  }
 }
