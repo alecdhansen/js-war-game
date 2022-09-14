@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  background-color: rgb(38, 128, 38);
+  background-color: rgb(41, 128, 84);
 }
 .table {
   display: flex;
@@ -44,4 +44,80 @@ body {
   margin: 0;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
+}
+.score-display {
+  width: 100%;
+  font-size: 4rem;
+  height: 80px;
+  border: none;
+  background-color: #252525;
+  color: rgb(43, 187, 120);
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 70px;
+}
+.center > h2 {
+  font-family: Helvetica;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  color: rgb(44, 127, 92);
+}
+.hand-display {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 4rem;
+  height: 20%;
+  margin-top: 10%;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 70px;
+  color: #fff;
+  border-color: #252525;
+}
+.player1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 100px;
+  border: 3px solid black;
+  background-color: rgb(44, 127, 92);
+  border-radius: 10px;
+  font-size: 35px;
+}
+.player2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 100px;
+  border: 3px solid black;
+  background-color: rgb(44, 127, 92);
+  border-radius: 10px;
+  font-size: 35px;
+}
+
+button {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(18, 111, 68);
+  color: #ffffff;
+  font-family: Helvetica;
+  font-size: 14px;
+  width: 15%;
+  height: 15%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 3px solid rgb(14, 92, 56);
+}
+button:hover {
+  background-color: rgb(36, 138, 90);
+  width: 15.5%;
+  height: 15.5%;
+  font-size: 15px;
 }
