@@ -27,6 +27,7 @@ body {
   width: 33.33333333%;
   margin: 0;
   position: relative;
+  user-select: none;
 }
 .left {
   border-right: 2.5px solid rgb(116, 113, 113);
@@ -48,15 +49,14 @@ body {
   border-top-right-radius: 10px;
   display: flex;
   justify-content: center;
-  
 }
 .instructions {
   font-size: 12px;
   width: 100%;
 }
-.player-text1 {
+.computer-text1 {
   width: 100%;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -64,9 +64,9 @@ body {
   position: relative;
   color: rgb(44, 127, 92);
 }
-.player-text2 {
+.you-text2 {
   width: 100%;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -104,12 +104,12 @@ body {
   color: rgb(43, 187, 120);
   text-align: center;
   font-family: Helvetica;
-  font-size:55px;
+  font-size: 55px;
   bottom: 25%;
   border-radius: 10px;
 }
 .sections > h2 {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   font-size: 90px;
   margin: 0;
   display: flex;
@@ -117,7 +117,6 @@ body {
   color: rgb(44, 127, 92);
   display: absolute;
   margin-top: 10%;
-
 }
 .hand-display {
   position: absolute;
@@ -145,7 +144,6 @@ body {
   border-radius: 10px;
   font-size: 35px;
   margin-left: 25px;
-  
 }
 .player2 {
   display: flex;
@@ -166,8 +164,8 @@ button {
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(18, 111, 68);
-  color: #ffffff;
+  background-color: #fff;
+  color: rgb(18, 111, 68);
   font-family: Helvetica;
   font-size: 14px;
   width: 25%;
@@ -176,12 +174,16 @@ button {
   border-radius: 5px;
   cursor: pointer;
   border: 3px solid rgb(14, 92, 56);
+  box-shadow: 0 6px #999;
+  transition: 0.1s;
 }
 button:hover {
-  background-color: rgb(36, 138, 90);
+  background-color: rgb(124, 156, 147);
+  color: #fff;
   width: 25.5%;
   height: 55px;
   font-size: 15px;
+  box-shadow: 0 3px #666;
 }
 @media (max-width: 700px) {
   .table {
@@ -189,72 +191,110 @@ button:hover {
     display: flex;
     flex-direction: column;
   }
-  .left {
+  .sections {
+    width: 100%;
+    height: 100%;
     border: 0;
-    width: 50%;
+    position: relative;
+  }
+  .left {
+    height: 25%;
+    /* position: absolute; */
   }
   .center {
-    border: 0;
-    width: 60%;
+    height: 50%;
   }
   .right {
-    border: 0;
-    width: 20%;
-  }
-  /* .center > h2 {
-    font-family: Helvetica;
-    font-size: 75px;
-    display: flex;
-    justify-content: center;
-    margin-top: -50px;
-    color: rgb(44, 127, 92);
-    width: 100%;
-    position: absolute;
-  }
-  button {
-    width: 75px;
-    margin-top: 15px;
-  }
-  button:hover {
-    width: 80px;
+    height: 25%;
   }
   .score-display1 {
-    height: 50px;
-    width: 50px;
-    top: 170%;
-    border-radius: 50%;
+    width: 35%;
+    font-size: 4rem;
+    height: 40px;
     font-size: 30px;
-    left: 20px;
+    top: 8%;
   }
   .score-display2 {
-    height: 50px;
-    width: 50px;
-    top: 70%;
-    left: 350%;
-    border-radius: 50%;
+    width: 35%;
+    font-size: 4rem;
+    height: 40px;
     font-size: 30px;
-    margin-right: 5px;
+    bottom: 8%;
   }
-  .player-text1 {
-    width: 90%;
-    font-size: 11px;
-    top: 165%;
-    left: -6%;
+  .computer-text1 {
+    font-size: 18px;
+    position: absolute;
+    top: 16%;
+    right: 33%;
   }
-  .player-text2 {
-    width: 90%;
-    font-size: 11px;
-    top: 65%;
-    left: 358%;
+  .you-text2 {
+    font-size: 18px;
+    position: absolute;
+    bottom: 16%;
+    left: 33%;
+  }
+  .center > h2 {
+    font-size: 60px;
+    bottom: 40%;
+    position: relative;
   }
   .hand-display {
-    height: 55px;
-    top: 180px;
-    border-color: #252525;
-    position: absolute;
-  }
-  .table {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    height: 120px;
+    bottom: 15%;
   }
-} */
+  .player1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 25%;
+    height: 60%;
+    border-radius: 10px;
+    font-size: 35px;
+    margin-left: 25px;
+    margin-top: 60px;
+  }
+  .player2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 25%;
+    height: 60%;
+    border-radius: 10px;
+    font-size: 35px;
+    margin-right: 25px;
+    margin-bottom: 60px;
+  }
+  button {
+    position: absolute;
+    top: 95%;
+    position: flex;
+    margin-left: 25%;
+    /* left: 75%;
+  transform: translate(-50%, -50%); */
+    background-color: #fff;
+    color: rgb(18, 111, 68);
+    font-family: Helvetica;
+    font-size: 14px;
+    width: 60px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 3px solid rgb(14, 92, 56);
+    box-shadow: 0 6px #999;
+    transition: 0.1s;
+  }
+  button:hover {
+    background-color: rgb(124, 156, 147);
+    width: 70px;
+    height: 60px;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 3px #666;
+  }
+}
