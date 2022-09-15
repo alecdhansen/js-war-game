@@ -26,12 +26,15 @@ body {
 .sections {
   width: 33.33333333%;
   margin: 0;
+  position: relative;
 }
 .left {
   border-right: 2.5px solid rgb(116, 113, 113);
   margin: 0;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
+  display: flex;
+  justify-content: center;
 }
 .center {
   border-left: 2.5px solid rgb(116, 113, 113);
@@ -43,75 +46,87 @@ body {
   margin: 0;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  
+}
+.instructions {
+  font-size: 12px;
+  width: 100%;
 }
 .player-text1 {
   width: 100%;
-  font-family: Helvetica;
-  font-size: 20px;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 32%;
   position: relative;
-  color: white;
+  color: rgb(44, 127, 92);
 }
 .player-text2 {
   width: 100%;
-  font-family: Helvetica;
-  font-size: 20px;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 32%;
   position: relative;
-  color: white;
+  color: rgb(44, 127, 92);
 }
 .score-display1 {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 75%;
   font-size: 4rem;
-  height: 125px;
+  height: 20%;
   border: none;
   background-color: #252525;
   color: rgb(43, 187, 120);
   text-align: center;
   font-family: Helvetica;
-  font-size: 65px;
-  top: 35%;
+  font-size: 55px;
+  bottom: 25%;
+  border-radius: 10px;
 }
 .score-display2 {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 75%;
   font-size: 4rem;
-  height: 125px;
+  height: 20%;
   border: none;
   background-color: #252525;
   color: rgb(43, 187, 120);
   text-align: center;
   font-family: Helvetica;
-  font-size: 65px;
-  top: 35%;
+  font-size:55px;
+  bottom: 25%;
+  border-radius: 10px;
 }
-.center > h2 {
-  font-family: Helvetica;
-  font-size: 75px;
+.sections > h2 {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 90px;
+  margin: 0;
   display: flex;
   justify-content: center;
   color: rgb(44, 127, 92);
+  display: absolute;
+  margin-top: 10%;
+
 }
 .hand-display {
+  position: absolute;
   display: flex;
   justify-content: space-around;
   width: 100%;
   font-size: 4rem;
-  height: 100px;
-  margin-top: 10%;
+  height: 25%;
+  bottom: 30%;
   text-align: center;
   font-family: Helvetica;
   font-size: 70px;
@@ -123,23 +138,29 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
-  width: 100px;
+  width: 30%;
+  height: 100%;
   border: 3px solid black;
   background-color: rgb(44, 127, 92);
   border-radius: 10px;
   font-size: 35px;
+  margin-left: 25px;
+  
 }
 .player2 {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  width: 100px;
+  width: 30%;
+  height: 100%;
   border: 3px solid black;
   background-color: rgb(44, 127, 92);
   border-radius: 10px;
   font-size: 35px;
+  margin-right: 25px;
 }
+
 button {
   position: absolute;
   top: 85%;
@@ -149,8 +170,8 @@ button {
   color: #ffffff;
   font-family: Helvetica;
   font-size: 14px;
-  width: 15%;
-  height: 15%;
+  width: 25%;
+  height: 50px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -158,13 +179,15 @@ button {
 }
 button:hover {
   background-color: rgb(36, 138, 90);
-  width: 15.5%;
-  height: 15.5%;
+  width: 25.5%;
+  height: 55px;
   font-size: 15px;
 }
 @media (max-width: 700px) {
   .table {
     height: 60vh;
+    display: flex;
+    flex-direction: column;
   }
   .left {
     border: 0;
@@ -178,7 +201,7 @@ button:hover {
     border: 0;
     width: 20%;
   }
-  .center > h2 {
+  /* .center > h2 {
     font-family: Helvetica;
     font-size: 75px;
     display: flex;
@@ -226,7 +249,7 @@ button:hover {
   }
   .hand-display {
     height: 55px;
-    top: 200px;
+    top: 180px;
     border-color: #252525;
     position: absolute;
   }
@@ -234,4 +257,4 @@ button:hover {
     display: flex;
     flex-direction: column;
   }
-}
+} */
