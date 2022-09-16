@@ -1,85 +1,117 @@
-const scoreDisplay1 = document.querySelector(".score-display1");
-const scoreDisplay2 = document.querySelector(".score-display2");
+const computersDeck = document.querySelector(".score-display1");
+const yourDeck = document.querySelector(".score-display2");
 const computerCard = document.querySelector(".player1");
-const playerCard = document.querySelector(".player2");
+const yourCard = document.querySelector(".player2");
 const drawButton = document.querySelector(".play-hand");
 
-let mainDeck = [];
-let computerDeck = [];
-let playerDeck = [];
+// let mainDeck = [];
+// let computerDeck = [];
+// let playerDeck = [];
 let cards = [];
-let values = [
-  "14",
-  "13",
-  "12",
-  "11",
-  "10",
-  "9",
-  "8",
-  "7",
-  "6",
-  "5",
-  "4",
-  "3",
-  "2",
-];
-let suits = ["♥", "♦", "♠", "♣"];
+// let values = [
+//   "14",
+//   "13",
+//   "12",
+//   "11",
+//   "10",
+//   "9",
+//   "8",
+//   "7",
+//   "6",
+//   "5",
+//   "4",
+//   "3",
+//   "2",
+// ];
+// let suits = ["♥", "♦", "♠", "♣"];
 let player1 = "";
 let player2 = "";
 
 // ----------CONSTRUCTORS---------- //
 
-const Player = function ({ name, deck, hand } = {}) {
-  (this.name = name), (this.deck = new Deck()), (this.hand = hand);
+const Player = function ({ name, hand } = {}) {
+  this.name = name;
+  this.hand = [];
 };
-const Game = function ({ player1, player2 }) {
-  (this.player1 = new Player("Computer")), (this.player2 = new Player("You"));
+const Game = function () {
+  this.player1 = new Player({ name: "Computer" });
+  this.player2 = new Player({ name: "You" });
+  this.deck = new Deck();
 };
-const game = new Game();
 
-const Deck = function ({ card }) {
-  this.card = new Card();
-};
 const Card = function ({ value, suit }) {
-  (this.value = value), (this.suit = suit);
+  this.value = value;
+  this.suit = suit;
 };
 
-Deck.prototype.hands = setUpTwoDecks();
-// -----------FUNCTIONS----------- //
-
-function setUpTwoDecks() {
+const Deck = function () {
+  this.cards = [];
+  let values = [
+    "14",
+    "13",
+    "12",
+    "11",
+    "10",
+    "9",
+    "8",
+    "7",
+    "6",
+    "5",
+    "4",
+    "3",
+    "2",
+  ];
+  let suits = ["♥", "♦", "♠", "♣"];
   for (let i = 0; i < suits.length; i++) {
     for (let j = 0; j < values.length; j++) {
       const suit = suits[i];
       const value = values[j];
-      // console.log(suit);
-      // console.log(value);
-      mainDeck.push({ value, suit });
-      mainDeck = shuffleArray(mainDeck);
-      computerDeck = mainDeck.slice(26);
-      playerDeck = mainDeck.slice(0, 26);
+      this.cards.push(new Card({ value, suit }));
+      // mainDeck = shuffleArray(mainDeck);
+      // computerDeck = mainDeck.slice(26);
+      // playerDeck = mainDeck.slice(0, 26);
     }
   }
-  // console.log(computerDeck);
-  // console.log(playerDeck);
-}
-setUpTwoDecks();
+  // console.log(this.cards);
+};
 
-function shuffleArray(array) {
-  let currentIndex = array.length,
+console.log();
+// -----------FUNCTIONS----------- //
+
+Game.prototype.shuffle = function () {
+  let currentIndex = this.deck.cards.length,
     randomIndex;
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
+    [this.deck.cards[currentIndex], this.deck.cards[randomIndex]] = [
+      this.deck.cards[randomIndex],
+      this.deck.cards[currentIndex],
     ];
   }
-  return array;
-}
+};
 
-function drawCard() {
-  let topCard1 = player1.deck.card[0];
-  let topCard2 = player2.deck.card[0];
-}
+// YOU ARE WORKING HERE!!!!!!!//------------------------------------------------------------------------------------and this isn't correct
+Game.prototype.deal = function () {
+  console.log(this.deck);
+  let player1Hand = this.player1.hand;
+  let player2Hand = this.player2.hand;
+  let mainDeck = this.deck;
+  player1Hand = mainDeck.slice(0, 26);
+  player2Hand = mainDeck.slice(26);
+  // console.log(this.player1.hand);
+};
+
+Game.prototype.draw = function () {};
+
+Game.prototype.start = function () {
+  this.shuffle();
+  this.deal();
+};
+
+// RUN THE GAME //
+const game = new Game();
+game.start();
+drawButton.addEventListener("click", game.draw());
+
+// console.log(game);
