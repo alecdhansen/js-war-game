@@ -91,23 +91,24 @@ Game.prototype.shuffle = function () {
   }
 };
 
-// YOU ARE WORKING HERE!!!!!!!//------------------------------------------------------------------------------------and this isn't correct
 Game.prototype.deal = function () {
-  console.log(this.deck);
+  let mainDeck = this.deck.cards;
   let player1Hand = this.player1.hand;
   let player2Hand = this.player2.hand;
-  let mainDeck = this.deck;
   player1Hand = mainDeck.slice(0, 26);
   player2Hand = mainDeck.slice(26);
-  // console.log(this.player1.hand);
+  computersDeck.innerHTML = player1Hand.length;
+  yourDeck.innerHTML = player2Hand.length;
+  // console.log(player1Hand);
+  // console.log(player2Hand);
 };
-
-Game.prototype.draw = function () {};
 
 Game.prototype.start = function () {
   this.shuffle();
   this.deal();
 };
+
+Game.prototype.draw = function () {};
 
 // RUN THE GAME //
 const game = new Game();
