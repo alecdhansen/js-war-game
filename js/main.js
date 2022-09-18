@@ -3,29 +3,14 @@ const yourDeck = document.querySelector(".score-display2");
 const computerCard = document.querySelector(".player1");
 const yourCard = document.querySelector(".player2");
 const drawButton = document.querySelector(".play-hand");
+const handDisplays = document.querySelector(".hand-display");
 
-// let mainDeck = [];
-// let computerDeck = [];
-// let playerDeck = [];
 let cards = [];
-// let values = [
-//   "14",
-//   "13",
-//   "12",
-//   "11",
-//   "10",
-//   "9",
-//   "8",
-//   "7",
-//   "6",
-//   "5",
-//   "4",
-//   "3",
-//   "2",
-// ];
-// let suits = ["♥", "♦", "♠", "♣"];
 let player1 = "";
 let player2 = "";
+let player1ActiveCard = [];
+let player2ActiveCard = [];
+let battlePot = [];
 
 // ----------CONSTRUCTORS---------- //
 
@@ -67,16 +52,18 @@ const Deck = function () {
       const suit = suits[i];
       const value = values[j];
       this.cards.push(new Card({ value, suit }));
-      // mainDeck = shuffleArray(mainDeck);
-      // computerDeck = mainDeck.slice(26);
-      // playerDeck = mainDeck.slice(0, 26);
     }
   }
-  // console.log(this.cards);
 };
 
 console.log();
 // -----------FUNCTIONS----------- //
+
+const game = new Game();
+
+let mainDeck = game.deck.cards;
+let player1Hand = game.player1.hand;
+let player2Hand = game.player2.hand;
 
 Game.prototype.shuffle = function () {
   let currentIndex = this.deck.cards.length,
@@ -92,15 +79,15 @@ Game.prototype.shuffle = function () {
 };
 
 Game.prototype.deal = function () {
-  let mainDeck = this.deck.cards;
-  let player1Hand = this.player1.hand;
-  let player2Hand = this.player2.hand;
+  // let mainDeck = this.deck.cards;
+  // let player1Hand = this.player1.hand;
+  // let player2Hand = this.player2.hand;
   player1Hand = mainDeck.slice(0, 26);
   player2Hand = mainDeck.slice(26);
   computersDeck.innerHTML = player1Hand.length;
   yourDeck.innerHTML = player2Hand.length;
-  // console.log(player1Hand);
-  // console.log(player2Hand);
+  computerCard.innerHTML = "";
+  yourCard.innerHTML = "";
 };
 
 Game.prototype.start = function () {
@@ -108,11 +95,42 @@ Game.prototype.start = function () {
   this.deal();
 };
 
-Game.prototype.draw = function () {};
+function updateHandCount() {
+  computersDeck.innerHTML = player1Hand.length;
+  yourDeck.innerHTML = player2Hand.length;
+}
+function updateActiveCardDisplay() {
+  computerCard.innerHTML = `${player1ActiveCard.value}${player1ActiveCard.suit}`;
+  yourCard.innerHTML = `${player2ActiveCard.value}${player2ActiveCard.suit}`;
+}
+function compare() {
+  if (player1ActiveCard.value > player2ActiveCard.value) {
+    player1Hand.unshift(player1ActiveCard);
+    player1Hand.unshift(player2ActiveCard);
+    computerCard.style.borderColor = "green";
+    yourCard.style.borderColor = "red";
+  } else {
+    player2Hand.unshift(player1ActiveCard);
+    player2Hand.unshift(player2ActiveCard);
+    computerCard.style.borderColor = "red";
+    yourCard.style.borderColor = "green";
+  }
+}
 
 // RUN THE GAME //
-const game = new Game();
 game.start();
-drawButton.addEventListener("click", game.draw());
-
-// console.log(game);
+drawButton.addEventListener(
+  "click",
+  (Game.prototype.draw = function () {
+    player1ActiveCard = player1Hand.pop();
+    player2ActiveCard = player2Hand.pop();
+    drawButton.innerHTML = "Draw";
+    updateActiveCardDisplay();
+    compare();
+    // console.log({ player1ActiveCard });
+    // console.log({ player2ActiveCard });
+    // console.log({ player1Hand });
+    // console.log({ player2Hand });
+    updateHandCount();
+  })
+);
