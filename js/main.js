@@ -86,8 +86,6 @@ Game.prototype.deal = function () {
   player2Hand = mainDeck.slice(26);
   computersDeck.innerHTML = player1Hand.length;
   yourDeck.innerHTML = player2Hand.length;
-  computerCard.innerHTML = "";
-  yourCard.innerHTML = "";
 };
 
 Game.prototype.start = function () {
@@ -107,13 +105,13 @@ function compare() {
   if (player1ActiveCard.value > player2ActiveCard.value) {
     player1Hand.unshift(player1ActiveCard);
     player1Hand.unshift(player2ActiveCard);
-    computerCard.style.borderColor = "green";
+    computerCard.style.borderColor = "greenyellow";
     yourCard.style.borderColor = "red";
   } else {
     player2Hand.unshift(player1ActiveCard);
     player2Hand.unshift(player2ActiveCard);
     computerCard.style.borderColor = "red";
-    yourCard.style.borderColor = "green";
+    yourCard.style.borderColor = "greenyellow";
   }
 }
 
@@ -122,6 +120,7 @@ game.start();
 drawButton.addEventListener(
   "click",
   (Game.prototype.draw = function () {
+    updateHandCount();
     player1ActiveCard = player1Hand.pop();
     player2ActiveCard = player2Hand.pop();
     drawButton.innerHTML = "Draw";
