@@ -126,10 +126,11 @@ drawButton.addEventListener(
     drawButton.innerHTML = "Draw";
     updateActiveCardDisplay();
     compare();
-    // console.log({ player1ActiveCard });
-    // console.log({ player2ActiveCard });
-    // console.log({ player1Hand });
-    // console.log({ player2Hand });
     updateHandCount();
   })
 );
+
+// console.log({ player1ActiveCard });
+// console.log({ player2ActiveCard });
+// console.log({ player1Hand });
+// console.log({ player2Hand });

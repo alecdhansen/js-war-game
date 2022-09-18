@@ -67,6 +67,7 @@ body {
   position: relative;
   color: rgb(44, 127, 92);
   text-shadow: 0.5px 0.5px rgb(28, 83, 60);
+  top: 15%;
 }
 .you-text2 {
   width: 100%;
@@ -78,6 +79,7 @@ body {
   position: relative;
   color: rgb(44, 127, 92);
   text-shadow: 0.5px 0.5px rgb(28, 83, 60);
+  top: 15%;
 }
 .score-display1 {
   position: absolute;
@@ -93,7 +95,7 @@ body {
   text-align: center;
   font-family: Helvetica;
   font-size: 55px;
-  bottom: 25%;
+  bottom: 40%;
   border-radius: 10px;
 }
 .score-display2 {
@@ -110,7 +112,7 @@ body {
   text-align: center;
   font-family: Helvetica;
   font-size: 55px;
-  bottom: 25%;
+  bottom: 40%;
   border-radius: 10px;
 }
 .sections > h2 {
@@ -131,7 +133,7 @@ body {
   width: 100%;
   font-size: 4rem;
   height: 25%;
-  bottom: 30%;
+  bottom: 40%;
   text-align: center;
   font-family: Helvetica;
   font-size: 70px;
@@ -180,15 +182,15 @@ body {
 }
 button {
   position: absolute;
-  top: 85%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   color: rgb(18, 111, 68);
   font-family: Helvetica;
-  font-size: 14px;
+  font-size: 16px;
   width: 25%;
-  height: 50px;
+  height: 75px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -200,15 +202,15 @@ button:hover {
   background-color: rgb(124, 156, 147);
   color: #fff;
   width: 25%;
-  height: 50px;
-  font-size: 14px;
+  height: 75px;
+  font-size: 16px;
   box-shadow: 5px 5px #999;
 }
 button:active {
   background-color: rgb(124, 156, 147);
-  width: 30%;
-  height: 60px;
-  font-size: 16px;
+  width: 20%;
+  height: 65px;
+  font-size: 14px;
   color: #fff;
   box-shadow: 3px 3px #666;
 }
@@ -232,6 +234,7 @@ button:active {
   }
   .right {
     height: 25%;
+    z-index: 10;
   }
   .score-display1 {
     width: 35%;
@@ -256,7 +259,7 @@ button:active {
   .you-text2 {
     font-size: 18px;
     position: absolute;
-    bottom: 16%;
+    bottom: -20%;
     left: 33%;
   }
   .center > h2 {
@@ -303,29 +306,30 @@ button:active {
     background-color: #fff;
     color: rgb(18, 111, 68);
     font-family: Helvetica;
-    font-size: 14px;
-    width: 60px;
-    height: 50px;
+    font-size: 16px;
+    width: 90px;
+    height: 60px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     border: 3px solid rgb(14, 92, 56);
     box-shadow: 5px 5px #999;
     transition: 0.1s;
+    z-index: 20;
   }
   button:hover {
     background-color: rgb(124, 156, 147);
     color: #fff;
-    width: 60px;
-    height: 50px;
-    font-size: 14px;
+    width: 90px;
+    height: 60px;
+    font-size: 16px;
     box-shadow: 5px 5px #999;
   }
   button:active {
     background-color: rgb(124, 156, 147);
-    width: 70px;
-    height: 60px;
-    font-size: 16px;
+    width: 80px;
+    height: 50px;
+    font-size: 14px;
     color: #fff;
     box-shadow: 3px 3px #666;
   }
