@@ -57,8 +57,6 @@ const Deck = function () {
     }
   }
 };
-
-console.log();
 // -----------FUNCTIONS----------- //
 
 const game = new Game();
@@ -81,9 +79,6 @@ Game.prototype.shuffle = function () {
 };
 
 Game.prototype.deal = function () {
-  // let mainDeck = this.deck.cards;
-  // let player1Hand = this.player1.hand;
-  // let player2Hand = this.player2.hand;
   player1Hand = mainDeck.slice(0, 26);
   player2Hand = mainDeck.slice(26);
   computersDeck.innerHTML = player1Hand.length;
@@ -119,29 +114,35 @@ function compare() {
     yourCard.style.borderColor = "greenyellow";
     updateHandCount();
   } else {
-    player1FC = player1Hand.slice(-5, player1Hand.length - 4);
-    player2FC = player2Hand.slice(-5, player2Hand.length - 4);
-    console.log({ player1FC });
-    console.log({ player2FC });
-    alert("BATTLE");
-    computerCard.style.borderColor = "red";
-    yourCard.style.borderColor = "red";
+    player1BattleCard = player1Hand.slice(-5, player1Hand.length - 4);
+    player2BattleCard = player2Hand.slice(-5, player2Hand.length - 4);
+    console.log({ player1BattleCard });
+    console.log({ player2BattleCard });
+    alert("BATTLE!");
+    computerCard.style.borderColor = "orange";
+    yourCard.style.borderColor = "orange";
     battlePot1 = player1Hand.splice(-3);
     battlePot2 = player2Hand.splice(-3);
 
-    if (parseInt(player1FC[0].value) > parseInt(player2FC[0].value)) {
+    if (
+      parseInt(player1BattleCard[0].value) >
+      parseInt(player2BattleCard[0].value)
+    ) {
       console.log(
-        "PLAY 1 WINS BATTLE",
-        `${player1FC[0].value} beats ${player2FC[0].value}`
+        "YOU WIN THE BATTLE",
+        `${player1BattleCard[0].value} beats ${player2BattleCard[0].value}`
       );
       console.log("BATTLE", battlePot1, battlePot2);
       player1Hand.unshift(...battlePot1, ...battlePot2);
       player1Hand.unshift(player1ActiveCard);
       player1Hand.unshift(player2ActiveCard);
-    } else if (parseInt(player2FC[0].value) > parseInt(player1FC[0].value)) {
+    } else if (
+      parseInt(player2BattleCard[0].value) >
+      parseInt(player1BattleCard[0].value)
+    ) {
       console.log(
-        "PLAY 2 WINS BATTLE",
-        `${player2FC[0].value} beats ${player1FC[0].value}`
+        "COMPUTER WINS BATTLE",
+        `${player2BattleCard[0].value} beats ${player1BattleCard[0].value}`
       );
       console.log("BATTLE", battlePot1, battlePot2);
       player2Hand.unshift(...battlePot1, ...battlePot2);
@@ -162,5 +163,17 @@ drawButton.addEventListener(
     drawButton.innerHTML = "Draw";
     updateActiveCardDisplay();
     compare();
+    // endGame();
   })
 );
+
+// function endGame() {
+//   if (player1.deck.cards.length === 0 || player2.deck.cards.length === 0) {
+//     if (player1.deck.cards.length === 0) {
+//       description.innerText = `Computer is out of cards! You WIN!`;
+//       console.log("player2 wins");
+//     } else {
+//       `You are out of cards! Computer WINS!`;
+//       console.log("player1 wins");
+//     }
+//   }
