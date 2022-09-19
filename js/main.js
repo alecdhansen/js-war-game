@@ -10,7 +10,8 @@ let player1 = "";
 let player2 = "";
 let player1ActiveCard = [];
 let player2ActiveCard = [];
-let battlePot = [];
+let battlePot1 = [];
+let battlePot2 = [];
 
 // ----------CONSTRUCTORS---------- //
 
@@ -117,20 +118,38 @@ function compare() {
     computerCard.style.borderColor = "red";
     yourCard.style.borderColor = "greenyellow";
     updateHandCount();
+  } else {
+    player1FC = player1Hand.slice(-5, player1Hand.length - 4);
+    player2FC = player2Hand.slice(-5, player2Hand.length - 4);
+    console.log({ player1FC });
+    console.log({ player2FC });
+    alert("BATTLE");
+    computerCard.style.borderColor = "red";
+    yourCard.style.borderColor = "red";
+    battlePot1 = player1Hand.splice(-3);
+    battlePot2 = player2Hand.splice(-3);
+
+    if (parseInt(player1FC[0].value) > parseInt(player2FC[0].value)) {
+      console.log(
+        "PLAY 1 WINS BATTLE",
+        `${player1FC[0].value} beats ${player2FC[0].value}`
+      );
+      console.log("BATTLE", battlePot1, battlePot2);
+      player1Hand.unshift(...battlePot1, ...battlePot2);
+      player1Hand.unshift(player1ActiveCard);
+      player1Hand.unshift(player2ActiveCard);
+    } else if (parseInt(player2FC[0].value) > parseInt(player1FC[0].value)) {
+      console.log(
+        "PLAY 2 WINS BATTLE",
+        `${player2FC[0].value} beats ${player1FC[0].value}`
+      );
+      console.log("BATTLE", battlePot1, battlePot2);
+      player2Hand.unshift(...battlePot1, ...battlePot2);
+      player2Hand.unshift(player1ActiveCard);
+      player2Hand.unshift(player2ActiveCard);
+    }
+    updateHandCount();
   }
-  // else {
-  //   computerCard.style.borderColor = "red";
-  //   yourCard.style.borderColor = "red";
-  //   battlePot.unshift(player1ActiveCard);
-  //   battlePot.unshift(player2ActiveCard);
-  //   battlePot.pop(player1Hand);
-  //   battlePot.pop(player1Hand);
-  //   battlePot.pop(player1Hand);
-  //   battlePot.pop(player2Hand);
-  //   battlePot.pop(player2Hand);
-  //   battlePot.pop(player2Hand);
-  //   updateHandCount();
-  // }
 }
 // RUN THE GAME //
 game.start();
