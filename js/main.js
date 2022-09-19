@@ -17,6 +17,7 @@ let battlePot = [];
 const Player = function ({ name, hand } = {}) {
   this.name = name;
   this.hand = [];
+  this.activeCard = {};
 };
 const Game = function () {
   this.player1 = new Player({ name: "Computer" });
@@ -102,19 +103,35 @@ function updateActiveCardDisplay() {
   yourCard.innerHTML = `${player2ActiveCard.value}${player2ActiveCard.suit}`;
 }
 function compare() {
-  if (player1ActiveCard.value > player2ActiveCard.value) {
+  if (parseInt(player1ActiveCard.value) > parseInt(player2ActiveCard.value)) {
     player1Hand.unshift(player1ActiveCard);
     player1Hand.unshift(player2ActiveCard);
     computerCard.style.borderColor = "greenyellow";
     yourCard.style.borderColor = "red";
-  } else {
+    updateHandCount();
+  } else if (
+    parseInt(player2ActiveCard.value) > parseInt(player1ActiveCard.value)
+  ) {
     player2Hand.unshift(player1ActiveCard);
     player2Hand.unshift(player2ActiveCard);
     computerCard.style.borderColor = "red";
     yourCard.style.borderColor = "greenyellow";
+    updateHandCount();
   }
+  // else {
+  //   computerCard.style.borderColor = "red";
+  //   yourCard.style.borderColor = "red";
+  //   battlePot.unshift(player1ActiveCard);
+  //   battlePot.unshift(player2ActiveCard);
+  //   battlePot.pop(player1Hand);
+  //   battlePot.pop(player1Hand);
+  //   battlePot.pop(player1Hand);
+  //   battlePot.pop(player2Hand);
+  //   battlePot.pop(player2Hand);
+  //   battlePot.pop(player2Hand);
+  //   updateHandCount();
+  // }
 }
-
 // RUN THE GAME //
 game.start();
 drawButton.addEventListener(
@@ -126,11 +143,5 @@ drawButton.addEventListener(
     drawButton.innerHTML = "Draw";
     updateActiveCardDisplay();
     compare();
-    updateHandCount();
   })
 );
-
-// console.log({ player1ActiveCard });
-// console.log({ player2ActiveCard });
-// console.log({ player1Hand });
-// console.log({ player2Hand });
