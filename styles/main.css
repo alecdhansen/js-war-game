@@ -180,6 +180,22 @@ body {
   box-shadow: 5px 5px #888;
   background-color: rgb(37, 115, 83);
 }
+.action-text {
+  top: 63%;
+  left: 50%;
+  width: 80%;
+  transform: translateX(-50%);
+  position: absolute;
+  border: 3px solid black;
+  background-color: rgb(44, 127, 92);
+  border-radius: 10px;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 18px;
+  text-shadow: 2px 2px #252525;
+}
 button {
   position: absolute;
   top: 80%;

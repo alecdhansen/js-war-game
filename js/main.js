@@ -1,9 +1,10 @@
-const computersDeck = document.querySelector(".score-display1");
-const yourDeck = document.querySelector(".score-display2");
-const computerCard = document.querySelector(".player1");
-const yourCard = document.querySelector(".player2");
+const yourDeck = document.querySelector(".score-display1");
+const computerDeck = document.querySelector(".score-display2");
+const yourCard = document.querySelector(".player1");
+const computerCard = document.querySelector(".player2");
 const drawButton = document.querySelector(".play-hand");
 const handDisplays = document.querySelector(".hand-display");
+const actionText = document.querySelector(".action-text");
 
 let cards = [];
 let player1 = "";
@@ -12,6 +13,7 @@ let player1ActiveCard = [];
 let player2ActiveCard = [];
 let battlePot1 = [];
 let battlePot2 = [];
+let gameOver = false;
 
 // ----------CONSTRUCTORS---------- //
 
@@ -21,8 +23,8 @@ const Player = function ({ name, hand } = {}) {
   this.activeCard = {};
 };
 const Game = function () {
-  this.player1 = new Player({ name: "Computer" });
-  this.player2 = new Player({ name: "You" });
+  this.player1 = new Player({ name: "You" });
+  this.player2 = new Player({ name: "Computer" });
   this.deck = new Deck();
 };
 
@@ -66,14 +68,14 @@ let player1Hand = game.player1.hand;
 let player2Hand = game.player2.hand;
 
 Game.prototype.shuffle = function () {
-  let currentIndex = this.deck.cards.length,
+  let i = this.deck.cards.length,
     randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [this.deck.cards[currentIndex], this.deck.cards[randomIndex]] = [
+  while (i !== 0) {
+    i--; //added above!
+    randomIndex = Math.floor(Math.random() * i);
+    [this.deck.cards[i], this.deck.cards[randomIndex]] = [
       this.deck.cards[randomIndex],
-      this.deck.cards[currentIndex],
+      this.deck.cards[i],
     ];
   }
 };
@@ -81,46 +83,60 @@ Game.prototype.shuffle = function () {
 Game.prototype.deal = function () {
   player1Hand = mainDeck.slice(0, 26);
   player2Hand = mainDeck.slice(26);
-  computersDeck.innerHTML = player1Hand.length;
-  yourDeck.innerHTML = player2Hand.length;
+  yourDeck.innerHTML = player1Hand.length;
+  computerDeck.innerHTML = player2Hand.length;
 };
 
 Game.prototype.start = function () {
   this.shuffle();
   this.deal();
 };
-
+Game.prototype.checkGameOver = function () {
+  if (player1Hand.length === 0 || player2Hand.length === 0) {
+    if (player1Hand.length === 0) {
+      actionText.value = `${this.player1.name} are out of cards. ${this.player2.name} wins!`;
+      console.log("player2 wins");
+      drawButton.disabled = true;
+    } else {
+      actionText.value = `${this.player2.name} is out of cards. ${this.player1.name} win!`;
+      console.log("player1 wins");
+      drawButton.disabled = true;
+    }
+  }
+};
 function updateHandCount() {
-  computersDeck.innerHTML = player1Hand.length;
-  yourDeck.innerHTML = player2Hand.length;
+  yourDeck.innerHTML = player1Hand.length;
+  computerDeck.innerHTML = player2Hand.length;
 }
 function updateActiveCardDisplay() {
-  computerCard.innerHTML = `${player1ActiveCard.value}${player1ActiveCard.suit}`;
-  yourCard.innerHTML = `${player2ActiveCard.value}${player2ActiveCard.suit}`;
+  yourCard.innerHTML = `${player1ActiveCard.value}${player1ActiveCard.suit}`;
+  computerCard.innerHTML = `${player2ActiveCard.value}${player2ActiveCard.suit}`;
 }
+
 function compare() {
   if (parseInt(player1ActiveCard.value) > parseInt(player2ActiveCard.value)) {
     player1Hand.unshift(player1ActiveCard);
     player1Hand.unshift(player2ActiveCard);
-    computerCard.style.borderColor = "greenyellow";
-    yourCard.style.borderColor = "red";
+    yourCard.style.borderColor = "#7ad33a";
+    computerCard.style.borderColor = "#e01313";
     updateHandCount();
+    actionText.value = `${game.player1.name} won the hand!`;
   } else if (
     parseInt(player2ActiveCard.value) > parseInt(player1ActiveCard.value)
   ) {
     player2Hand.unshift(player1ActiveCard);
     player2Hand.unshift(player2ActiveCard);
-    computerCard.style.borderColor = "red";
-    yourCard.style.borderColor = "greenyellow";
+    yourCard.style.borderColor = "#e01313";
+    computerCard.style.borderColor = "#7ad33a";
+    actionText.value = `${game.player2.name} won the hand!`;
     updateHandCount();
   } else {
     player1BattleCard = player1Hand.slice(-5, player1Hand.length - 4);
     player2BattleCard = player2Hand.slice(-5, player2Hand.length - 4);
     console.log({ player1BattleCard });
     console.log({ player2BattleCard });
-    alert("BATTLE!");
-    computerCard.style.borderColor = "orange";
-    yourCard.style.borderColor = "orange";
+    yourCard.style.borderColor = "#dc851a";
+    computerCard.style.borderColor = "#dc851a";
     battlePot1 = player1Hand.splice(-3);
     battlePot2 = player2Hand.splice(-3);
 
@@ -132,6 +148,7 @@ function compare() {
         "YOU WIN THE BATTLE",
         `${player1BattleCard[0].value} beats ${player2BattleCard[0].value}`
       );
+      actionText.value = `Battle! ${game.player1.name} won the battle!`;
       console.log("BATTLE", battlePot1, battlePot2);
       player1Hand.unshift(...battlePot1, ...battlePot2);
       player1Hand.unshift(player1ActiveCard);
@@ -141,10 +158,11 @@ function compare() {
       parseInt(player1BattleCard[0].value)
     ) {
       console.log(
-        "COMPUTER WINS BATTLE",
+        "COMPUTER WINS THE BATTLE",
         `${player2BattleCard[0].value} beats ${player1BattleCard[0].value}`
       );
       console.log("BATTLE", battlePot1, battlePot2);
+      actionText.value = `Battle! ${game.player2.name} won the battle!`;
       player2Hand.unshift(...battlePot1, ...battlePot2);
       player2Hand.unshift(player1ActiveCard);
       player2Hand.unshift(player2ActiveCard);
@@ -156,24 +174,13 @@ function compare() {
 game.start();
 drawButton.addEventListener(
   "click",
-  (Game.prototype.draw = function () {
+  (game.draw = function () {
     updateHandCount();
     player1ActiveCard = player1Hand.pop();
     player2ActiveCard = player2Hand.pop();
     drawButton.innerHTML = "Draw";
     updateActiveCardDisplay();
     compare();
-    // endGame();
+    game.checkGameOver();
   })
 );
-
-// function endGame() {
-//   if (player1.deck.cards.length === 0 || player2.deck.cards.length === 0) {
-//     if (player1.deck.cards.length === 0) {
-//       description.innerText = `Computer is out of cards! You WIN!`;
-//       console.log("player2 wins");
-//     } else {
-//       `You are out of cards! Computer WINS!`;
-//       console.log("player1 wins");
-//     }
-//   }
